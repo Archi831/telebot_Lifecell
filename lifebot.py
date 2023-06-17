@@ -15,14 +15,12 @@ with open('data.json', 'r', encoding='utf-8') as file:
 # Welcoming words
 @bot.message_handler(commands=['start'])
 def start_handler(message):
-    global data
     bot.send_message(message.chat.id, "Hello, I'm your personal advisor")
     print(message.chat.id)
     
 
 @bot.message_handler(commands=['find'])
 def finder(message):
-    global data
     chat_id = message.chat.id
 
     # Check if the user is new
@@ -44,7 +42,6 @@ def finder(message):
     bot.register_next_step_handler(msg, Input_user_minutes)
 
 def Input_user_minutes(message):
-    global data
     text = message.text
     chat_id = message.chat.id
 
@@ -62,7 +59,6 @@ def Input_user_minutes(message):
     bot.register_next_step_handler(msg, Input_user_gigabites)
 
 def Input_user_gigabites(message):
-    global data
     text = message.text
     chat_id = message.chat.id
 
