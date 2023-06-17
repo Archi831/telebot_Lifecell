@@ -1,13 +1,16 @@
 {
-    "test": [
-        {
-            "teest": "1",
-            "a": "2"
+    "users": {
+        "user_id": {
+            "minutes": "10",
+            "gigabytes": "20"
         },
-        {
-            "emp_name": "Nikhil",
-            "email": "nikhil@geeksforgeeks.org",
-            "job_profile": "Full Time"
+        "2nd_user_id": {
+            "minutes": "12",
+            "gigabytes": "54"
+        },
+        "5283174354": {
+            "minutes": "10",
+            "gigabytes": "10"
         }
-    ]
+    }
 }
