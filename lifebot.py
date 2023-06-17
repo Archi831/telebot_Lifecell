@@ -9,8 +9,7 @@ bot = telebot.TeleBot(TOKEN)
 
 # Load the data from the json file
 with open('data.json', 'r', encoding='utf-8') as file:
-    data = json.load(file)
-
+    data = json.loads(file.read())
 
 # Welcoming words
 @bot.message_handler(commands=['start'])
@@ -73,7 +72,7 @@ def Input_user_gigabites(message):
     msg = bot.send_message(chat_id, "Saving your data...")
     
     with open('data.json', 'w', encoding='utf-8') as file:
-        json.dump(data, file, indent=4, ensure_ascii=False)
+        file.write(json.dumps(data, ensure_ascii=False, indent=4))
         
 
 def tariff_choser():
