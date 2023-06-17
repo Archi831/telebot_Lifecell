@@ -25,11 +25,11 @@ def finder(message):
     # Check if the user is new
     # If they are new, add them to the "database"
     try:
-        data["users"][message.chat.id]
+        data["users"][str(message.chat.id)]
         print("User found")
     except KeyError:
         print("New user")
-        data["users"][message.chat.id] = { "minutes": None, "gigabytes": None }
+        data["users"][str(message.chat.id)] = { "minutes": None, "gigabytes": None }
 
     bot.send_message(chat_id, 'I will help you to find your optimal tariff plan that best suits your needs.')
     time.sleep(1)
@@ -50,7 +50,7 @@ def Input_user_minutes(message):
         return
     
     bot.send_message(chat_id, 'You speak for ' + str(text) + " minutes")
-    data["users"][message.chat.id]["minutes"] = text
+    data["users"][str(message.chat.id)]["minutes"] = text
     
 
     print(f"User {message.chat.id} talks for {text} minutes")
@@ -66,13 +66,14 @@ def Input_user_gigabites(message):
         bot.register_next_step_handler(msg, Input_user_minutes)
         return
     
-    data["users"][message.chat.id]["gigabytes"] = text
+    data["users"][str(message.chat.id)]["gigabytes"] = text
     print(f"User {message.chat.id} uses {text} gb of internet")
     bot.send_message(chat_id, 'You use ' + str(text) + " gigabytes of internet")
     msg = bot.send_message(chat_id, "Saving your data...")
     
     with open('data.json', 'w', encoding='utf-8') as file:
         file.write(json.dumps(data, ensure_ascii=False, indent=4))
+
         
 
 def tariff_choser():
