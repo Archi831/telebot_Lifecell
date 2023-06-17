@@ -9,17 +9,20 @@ bot = telebot.TeleBot(TOKEN)
 
 # Load the data from the json file
 with open('data.json', 'r', encoding='utf-8') as file:
-    data = json.loads(file.read())
+    data = json.load(file)
+
 
 # Welcoming words
 @bot.message_handler(commands=['start'])
 def start_handler(message):
+    global data
     bot.send_message(message.chat.id, "Hello, I'm your personal advisor")
     print(message.chat.id)
     
-
+#initialize data mining :)
 @bot.message_handler(commands=['find'])
 def finder(message):
+    global data
     chat_id = message.chat.id
 
     # Check if the user is new
@@ -40,7 +43,9 @@ def finder(message):
     msg = bot.send_message(chat_id, 'Tell me how much do you talk (mins)')
     bot.register_next_step_handler(msg, Input_user_minutes)
 
+# Ask for minutes
 def Input_user_minutes(message):
+    global data
     text = message.text
     chat_id = message.chat.id
 
@@ -58,6 +63,7 @@ def Input_user_minutes(message):
     bot.register_next_step_handler(msg, Input_user_gigabites)
 
 def Input_user_gigabites(message):
+    global data
     text = message.text
     chat_id = message.chat.id
 
@@ -72,9 +78,18 @@ def Input_user_gigabites(message):
     msg = bot.send_message(chat_id, "Saving your data...")
     
     with open('data.json', 'w', encoding='utf-8') as file:
-        file.write(json.dumps(data, ensure_ascii=False, indent=4))
-
+        json.dump(data, file, indent=4, ensure_ascii=False)
         
+
+@bot.message_handler(commands='answers')
+def answers(message):
+    chat_id = message.chat.id
+    try:
+       bot.send_message(chat_id, f"Minutes - {data['users'][str(message.chat.id)]['minutes']}")
+       bot.send_message(chat_id, f"Gigabytes - {data['users'][str(message.chat.id)]['gigabytes']}")
+    except KeyError:
+        bot.send_message(chat_id, "No answers submitted yet")
+
 
 def tariff_choser():
     pass
@@ -84,4 +99,3 @@ def check_data():
 
 
 bot.polling()
-
