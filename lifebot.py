@@ -54,7 +54,7 @@ def InputAnswer2(message):
     data['gigabytes'].append(text)
     print(f"User {message.chat.id} uses {text} gb of internet")
     bot.send_message(chat_id, 'You use ' + str(text) + " gigabytes of internet")
-    msg = "Saving your data..."
+    msg = bot.send_message(chat_id, "Saving your data...")
     bot.register_next_step_handler(msg, write_json)
 
 def write_json(new_data, filename='data.json'):
