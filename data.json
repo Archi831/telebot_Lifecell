@@ -1,16 +1,4 @@
 {
     "users": {
-        "user_id": {
-            "minutes": "10",
-            "gigabytes": "20"
-        },
-        "2nd_user_id": {
-            "minutes": "12",
-            "gigabytes": "54"
-        },
-        "5283174354": {
-            "minutes": "10",
-            "gigabytes": "10"
-        }
     }
 }
