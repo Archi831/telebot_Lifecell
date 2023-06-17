@@ -5,7 +5,7 @@ from telebot import types
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 #main variables
-TOKEN = "5844896817:AAFqEWkdO27X6w13h5bzOBxFYhgJ58MBr80"
+TOKEN = "<Token>"
 bot = telebot.TeleBot(TOKEN)
 
 # Load the data from the json file
